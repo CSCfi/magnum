@@ -93,6 +93,8 @@ spec:
     - --leader-elect=true
     - --service-account-private-key-file=${SERVICE_ACCOUNT_PRIVATE_KEY_FILE}
     - --root-ca-file=${ROOT_CA_FILE}
+    - --cloud-config=/etc/sysconfig/kube_openstack_config
+    - --cloud-provider=openstack
     livenessProbe:
       httpGet:
         host: 127.0.0.1
@@ -116,7 +118,7 @@ spec:
       path: /srv/kubernetes
     name: ssl-certs-kubernetes
   - hostPath:
-      path: /etc/ssl/certs
+      path: /etc/pki/ca-trust/extracted/pem
     name: ssl-certs-host
   - hostPath:
       path: /etc/sysconfig
